@@ -13,6 +13,7 @@ import dotenv
 dotenv.load_dotenv()
 api_key = os.getenv("WATSONX_APIKEY")
 model_id = "meta-llama/llama-4-maverick-17b-128e-instruct-fp8"
+#model_id = "ibm/granite-vision-3-2-2b"
 app = Flask(__name__)
 
 ### Initialize model instance
@@ -23,7 +24,9 @@ credentials = Credentials(
 
 client = APIClient(credentials)
 project_id = "ea6eef34-2eb1-4e4d-9e47-3ee42ec5aafd"
-params = TextChatParameters()
+params = TextChatParameters(
+    temperature=0.7
+)
 model = ModelInference(
             model_id=model_id,
             credentials=credentials,
